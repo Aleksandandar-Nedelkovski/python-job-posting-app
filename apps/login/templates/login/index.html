@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Python Exam | Aleksandar Nedelkovski</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'login/css/styles.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+        crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col"></div> <br>
+            <div class="col-8">
+                {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                    <p {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</p>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+            <div class="col"></div>
+        </div>
+        <div class="row">
+            <div class="col"></div>
+            <div class="col-3">
+                <h1>Registration</h1> <br>
+                <form action="/register" , method="POST">
+                    {% csrf_token %}
+                    <p>First Name: <br> <input type="text" name="name" placeholder="Your name"></p>
+                    <p>Last Name: <br> <input type="text" name="lname" placeholder="Your last name"></p>
+                    <p>Email: <br> <input type="text" name="email" placeholder="Your email"></p>
+                    <p>Password: <br> <input type="password" name="password" placeholder="Your password"></p>
+                    <p>Confirm PW: <br> <input type="password" name="confirm" placeholder="Confirm password"></p>
+                    <p> <a> <button type="submit" class="btn btn-primary">Register</button></a></p>
+                </form>
+            </div>
+            <div class="col-3">
+                <h1>Login</h1>
+                <form action="/login" , method="POST"> <br>
+                    {% csrf_token %}
+                    <p>Email: <br> <input type="text" name="email" placeholder="Your email"></p>
+                    <p>Password: <br> <input type="password" name="password" placeholder="Your password"></p>
+                    <p> <a> <button type="submit" class="btn btn-primary">Login</button></a></p>
+                </form>
+            </div>
+            <div class="col"></div>
+        </div>
+    </div>
+</body>
+
+</html>

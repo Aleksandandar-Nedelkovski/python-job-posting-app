@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Quote Dashboard </title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'login/css/styles.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+        crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <br>
+                <h3>Welcome {{user.name}} {{user.lname}}</h3>
+            </div>
+            <div class="col-md-auto"> <br> <a href="/user/{{user.id}}/edit">Edit my account </a>
+            </div>
+            <div class="col col-lg-2"> <br>
+                <a href="/logout"> <button type="button" class="btn btn-dark">Log off</button> </a>
+            </div>
+        </div>
+        <!--header end-->
+        <hr>
+        <div class="container">
+            <div class="row justify-content-around">
+                <div class="col-4">
+                    <h2>Quotes</h2>
+                    <div id="quotes">
+                        {% for quote in all_messages reversed %}
+                        <p>
+                            <h5> {{quote.uploaded_by.name}}: "{{quote.message_body}}"</h5>
+                            {% if user.name == quote.uploaded_by.name %}
+                            <form action="/delete" method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="quote_id" value={{quote.id}}>
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                            {% endif %}
+                            <strong>Posted by <a href="user/{{quote.uploaded_by.id}}"> {{ quote.uploaded_by.name }} {{quote.uploaded_by.lname }} </a></strong>
+                        </p>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="col-4">
+                    {% if messages %}
+                    <ul>
+                        {% for message in messages %}
+                        <p {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</p>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                    <form action="/post_quote" method="POST">
+                        {% csrf_token %}
+                        <h3>Add a quote!</h3>
+                        <p>Author: <br> <input type="text" name="author" placeholder="Name of the author"> </p>
+                        <p>Quote: <br><input type="text" name="quote" rows="5" cols="50" placeholder="Quote"> </p>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form> <br>
+                </div>
+            </div>
+            <!--main content end -->
+            <footer>
+                <hr>
+                <h6>Python Exam | Aleksandar Nedelkovski</h6>
+            </footer>
+            <!--footer end -->
+        </div>
+</body>
+
+</html>

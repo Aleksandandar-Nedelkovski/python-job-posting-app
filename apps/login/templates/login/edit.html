@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Edit {{user.name}} {{user.lname}} </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+        crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col"></div>
+            <div class="col-6"> <br>
+                <h1>Edit My Account</h1>
+            </div>
+            <div class="col"> <br>
+                <a href="/quotes"><button type="submit" class="btn btn-outline-primary">Back</button>
+                </a>
+                <a href="/logout"> <button type="button" class="btn btn-dark">Log off</button> </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col"></div>
+            <div class="col-6"> <br> <br>
+                {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                    <p {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</p>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                <form action="/user/{{user.id}}/update" method="POST">
+                    {% csrf_token %}
+                    <p>Name: <br> <input type="text" name="name" value="{{user.name}}"> </p>
+                    <p>Last Name: <br> <input type="text" name="lname" value="{{user.lname}}"></p>
+                    <p>Email: <br> <input type="email" name="email" value="{{user.email}}"></p>
+                    <br> <br>
+                    <a href="/user/{{user.id}}/edit"><button type="submit" class="btn btn-outline-success">Update</button>
+                    </a>
+                </form>
+            </div>
+            <div class="col"></div>
+        </div>
+    </div>
+</body>
+
+</html>
