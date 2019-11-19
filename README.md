@@ -7,4 +7,4 @@
 <li>Utilized Pair Programming development methods. </li>
 <ul>
 
-p>AWS Link: http://18.188.48.254/ </p>
+<p>Deployed on AWS: http://18.188.48.254/ </p>
