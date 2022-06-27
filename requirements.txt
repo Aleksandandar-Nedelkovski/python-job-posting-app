@@ -2,7 +2,7 @@ autopep8==1.4.3
 bcrypt==3.1.6
 cffi==1.11.5
 Django==2.2.27
-mysql-connector-python==8.0.13
+mysql-connector-python==8.0.14
 pycodestyle==2.4.0
 pycparser==2.19
 six==1.16.0
